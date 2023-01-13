@@ -1,7 +1,7 @@
 <?php
 
 require ROOT_PATH.'/app/controllers/usercontroller.php';
-// require ROOT_PATH.'/app/controllers/scratchcontroller.php';
+require ROOT_PATH.'/app/controllers/scratchcontroller.php';
 // require ROOT_PATH.'/app/controllers/transactioncontroller.php';
 // include ROOT_PATH.'/app/db.php';
 // include ROOT_PATH.'/config/db.php';
@@ -19,7 +19,10 @@ class server{
 				],
 				'/delete_user' => [
 					 'DELETE' => 'usercontroller@delete_user',
-				]
+				],
+				'/generate_scratch_card' => [
+					 'POST' => 'scratchcontroller@generate_scratch_card',
+				],
 	
 	);
     public function handle($route)
@@ -65,6 +68,7 @@ class server{
             $routeParams = explode("@", $routeData[$type]);
             $className = $routeParams[0];
             $controller = new $className();
+			
 			// var_dump('POST');
 			// var_dump($_POST);
             return $controller->{$routeParams[1]}($params);

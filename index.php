@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 define('ROOT_PATH',dirname(__DIR__).'/scratch');
 define('BASEURL','/scratch/');
 require ROOT_PATH.'/app/server.php';
