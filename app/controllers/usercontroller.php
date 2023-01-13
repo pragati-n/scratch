@@ -29,7 +29,8 @@ class usercontroller
 	}
 	public function update_user($params)
 	{
-		
+		// echo "<pre>";
+		// print_r($params);
 		return $this->model->update_user_data($params);
 	}
 	

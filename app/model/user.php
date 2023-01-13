@@ -112,13 +112,31 @@ class user{
    {
 		header("Access-Control-Allow-Origin: *");
 		header("Content-Type: application/json; charset=UTF-8");
-		$sql = "UPDATE tbl_user set first_name =:FIRSTNAME , last_name =:LASTNAME where id=:ID";
-		$r_data = $this->conn->prepare($sql);
-		$r_data->bindParam(':FIRSTNAME',$param['first_name']);
-		$r_data->bindParam(':LASTNAME',$param['last_name']);
-		$r_data->bindParam(':ID',$param['id']);
-		$ret = $r_data->execute();
-		return ['status' => $ret, 'errors' =>$errors];
+		$errors = array();
+		if($params['id'])
+		{	
+			if (!filter_var(trim($params['email']), FILTER_VALIDATE_EMAIL)){
+				$errors[] = 'Enter Valid email address';
+			}
+			$sql = "UPDATE tbl_user set first_name =:FIRSTNAME , last_name =:LASTNAME, email =:EMAIL, is_active =:is_active where id=:ID";
+			// echo $param['first_name'];
+			$r_data = $this->conn->prepare($sql);
+			$r_data->bindParam(':FIRSTNAME',$params['first_name']);
+			$r_data->bindParam(':LASTNAME',$params['last_name']);
+			$r_data->bindParam(':EMAIL',$params['email']);
+			$r_data->bindParam(':is_active',$params['is_active']);
+			$r_data->bindParam(':ID',$params['id']);
+			$ret = $r_data->execute();
+			$ret_arr['code'] = 200;
+			$ret_arr['success'] = true;
+			$ret_arr['data'] = "User updated successfully";
+		}
+		if(count($errors)>0)
+		{
+			$ret_arr['success'] = false;
+			$ret_arr['data'] = implode(",",$errors);
+		}
+		return $ret_arr;
    }
   
 }
