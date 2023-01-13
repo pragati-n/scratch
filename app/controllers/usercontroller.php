@@ -33,6 +33,10 @@ class usercontroller
 		// print_r($params);
 		return $this->model->update_user_data($params);
 	}
+	public function delete_user($params)
+	{
+		return $this->model->delete_user_data($params);
+	}
 	
 	
 }

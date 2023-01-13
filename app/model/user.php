@@ -131,6 +131,38 @@ class user{
 			$ret_arr['success'] = true;
 			$ret_arr['data'] = "User updated successfully";
 		}
+		else
+		{
+			$errors[] = 'Enter user id';
+		}
+		
+		if(count($errors)>0)
+		{
+			$ret_arr['success'] = false;
+			$ret_arr['data'] = implode(",",$errors);
+		}
+		return $ret_arr;
+   } 
+   public function delete_user_data($params)
+   {
+		header("Access-Control-Allow-Origin: *");
+		header("Content-Type: application/json; charset=UTF-8");
+		$errors = array();
+		if($params['id'] > 0)
+		{	
+			
+			$sql = " DELETE from ".$this->table_name." where id =:ID";
+			$res = $this->conn->prepare($sql);
+			$res->bindParam(':ID',$params['id']);
+			$ret  = $res->execute();
+			$ret_arr['code'] = 200;
+			$ret_arr['success'] = true;
+			$ret_arr['data'] = "User deleted successfully";
+		}
+		else
+		{
+			$errors[] = 'Enter user id';
+		}
 		if(count($errors)>0)
 		{
 			$ret_arr['success'] = false;
