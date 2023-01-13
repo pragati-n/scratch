@@ -2,7 +2,7 @@
 
 require ROOT_PATH.'/app/controllers/usercontroller.php';
 require ROOT_PATH.'/app/controllers/scratchcontroller.php';
-// require ROOT_PATH.'/app/controllers/transactioncontroller.php';
+require ROOT_PATH.'/app/controllers/transactioncontroller.php';
 // include ROOT_PATH.'/app/db.php';
 // include ROOT_PATH.'/config/db.php';
 
@@ -25,6 +25,9 @@ class server{
 				],
 				'/unused_scratch_card' => [
 					 'GET' => 'scratchcontroller@unused_scratch_card',
+				],
+				'/assign_transaction' => [
+					 'POST' => 'transactioncontroller@assign_transaction',
 				],
 	
 	);
