@@ -168,7 +168,7 @@ class user{
 			$ret_arr['success'] = false;
 			$ret_arr['data'] = implode(",",$errors);
 		}
-		return $ret_arr;
+		return $ret_arr; 
    }
   
 }

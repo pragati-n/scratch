@@ -35,7 +35,7 @@ class usercontroller
 	}
 	public function delete_user($params)
 	{
-		return $this->model->delete_user_data($params);
+		return $this->model->delete_user_data($params); 
 	}
 	
 	
