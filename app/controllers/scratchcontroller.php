@@ -23,6 +23,13 @@ class scratchcontroller
 		// print_r($params);
 		return $this->model->generate_scratch_cards($params);
 	}
+	public function unused_scratch_card()
+	{
+		
+		// echo "<pre>";
+		// print_r($params);
+		return $this->model->unused_scratch_cards($params);
+	}
 	
 	
 	

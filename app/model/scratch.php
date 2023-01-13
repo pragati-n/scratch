@@ -74,5 +74,38 @@ class scratch{
 		}
 		return $ret_arr;
 	}
+	
+	public function unused_scratch_cards()
+	{
+		header("Access-Control-Allow-Origin: *");
+		header("Content-Type: application/json; charset=UTF-8");
+		$sql ="SELECT * from tbl_scratch_card  where is_active = 1 and 	is_scratched  = 0 ";
+		$r_data = $this->conn->prepare($sql);
+		$r_data->execute();
+		$data = $r_data->fetchAll();
+		
+		if(count($data) > 0)
+		{
+			$ret_arr['success'] = true;
+			foreach($data as $key => $val)
+			{
+				//scratch_code
+				$rdata[$key]['id'] =   $val['id'];
+				$rdata[$key]['scratch_code'] =   $val['scratch_code'];
+				$rdata[$key]['discount_amount'] =   $val['discount_amount'];
+				$rdata[$key]['is_active'] =   $val['is_active'];
+				
+			}
+			$ret_arr['data']= $rdata ;
+				$ret_arr['code'] = 200;
+		}
+		else
+		{
+			$ret_arr['success'] = false;
+			$ret_arr['data'] = "No unused scratch cards in the system";
+		}
+		return $ret_arr;
+		
+	}
   
 }

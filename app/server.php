@@ -23,6 +23,9 @@ class server{
 				'/generate_scratch_card' => [
 					 'POST' => 'scratchcontroller@generate_scratch_card',
 				],
+				'/unused_scratch_card' => [
+					 'GET' => 'scratchcontroller@unused_scratch_card',
+				],
 	
 	);
     public function handle($route)
