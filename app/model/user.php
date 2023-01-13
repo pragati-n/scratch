@@ -48,6 +48,8 @@ class user{
 				$rdata[$key]['is_active'] =   $val['is_active'];
 			}
 			$ret_arr['data']= $rdata ;
+			$ret_arr['code'] = 200;
+			
 			// print_r($ret_arr);
 			
 		}
@@ -93,12 +95,30 @@ class user{
 		}
 		if($res)
 		{
+			$ret_arr['code'] = 200;
 			$ret_arr['success'] = true;
-			$ret_arr['data'] = false;
+			
+		}
+		else
+		{
+			$ret_arr['success'] = false;
+			$ret_arr['data'] = implode(",",$errors);
 		}
 		return $ret_arr;
 	
 	   
+   }
+   public function update_user_data($params)
+   {
+		header("Access-Control-Allow-Origin: *");
+		header("Content-Type: application/json; charset=UTF-8");
+		$sql = "UPDATE tbl_user set first_name =:FIRSTNAME , last_name =:LASTNAME where id=:ID";
+		$r_data = $this->conn->prepare($sql);
+		$r_data->bindParam(':FIRSTNAME',$param['first_name']);
+		$r_data->bindParam(':LASTNAME',$param['last_name']);
+		$r_data->bindParam(':ID',$param['id']);
+		$ret = $r_data->execute();
+		return ['status' => $ret, 'errors' =>$errors];
    }
   
 }

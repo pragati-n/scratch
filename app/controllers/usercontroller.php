@@ -27,6 +27,11 @@ class usercontroller
 		
 		return $this->model->create_user_data($params);
 	}
+	public function update_user($params)
+	{
+		
+		return $this->model->update_user_data($params);
+	}
 	
 	
 }

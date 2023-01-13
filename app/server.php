@@ -30,7 +30,7 @@ class server{
 			  http_response_code($response['code']);
             echo json_encode([
                 'success' => $response['success'] ?? true,
-				// 'code' =>$response['code'],
+				'code' =>$response['code'],
                  'data' => $response['data'],
 				 
             ]);
