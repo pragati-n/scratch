@@ -22,6 +22,11 @@ class usercontroller
 		return $this->model->fetch_user_data();
 	}
 	
+	public function create_user($params)
+	{
+		
+		return $this->model->create_user_data($params);
+	}
 	
 	
 }

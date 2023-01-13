@@ -65,5 +65,40 @@ class user{
 	
 	   
    }
+   
+   public function create_user_data($params)
+   {
+		
+		header("Access-Control-Allow-Origin: *");
+		header("Content-Type: application/json; charset=UTF-8");
+		
+		$ret = 0;
+        $errors = array();
+		
+        if(!$params['first_name']){
+		    $errors[] = 'First Name is required';
+        }
+        if (!filter_var(trim($params['email']), FILTER_VALIDATE_EMAIL)){
+		    $errors[] = 'Enter Valid email address';
+        }
+
+		if(count($errors) == 0)
+		{
+			
+			$data = ['first_name'=>$params['first_name'],'email'=>$params['email'],'last_name'=>$params['last_name'],'is_active'=>1];
+		
+			$sql = " INSERT INTO  ".$this->table_name." (first_name,last_name,email,is_active)  values (:first_name, :last_name, :email,:is_active)";
+			$res = $this->conn->prepare($sql);
+			$res  = $res->execute($data);
+		}
+		if($res)
+		{
+			$ret_arr['success'] = true;
+			$ret_arr['data'] = false;
+		}
+		return $ret_arr;
+	
+	   
+   }
   
 }
